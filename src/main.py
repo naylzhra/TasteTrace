@@ -13,11 +13,10 @@ def fetch_reviews():
         sys.exit(f"MySQL error: {err}")
 
 def analyse():
-    # stats[item] = [mentions, sum_rate]
     stats = collections.defaultdict(lambda: [0, 0])
 
     for text, rate in fetch_reviews():
-        rate = rate or 0                       # NULL safeguard
+        rate = rate or 0
         for item in extract_mentions(text):
             stats[item][0] += 1
             stats[item][1] += rate
